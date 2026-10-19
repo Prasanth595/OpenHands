@@ -179,6 +179,10 @@ function normalizeDraft(value: AutomationSetupDraft): AutomationSetupDraft {
     typeof value.materializedAutomationId === "string"
       ? value.materializedAutomationId.trim()
       : null;
+  const existingCustomTarballPath =
+    typeof value.existingCustomTarballPath === "string"
+      ? value.existingCustomTarballPath.trim()
+      : "";
   const appliedAgentEventIds = Array.isArray(value.appliedAgentEventIds)
     ? [
         ...new Set(
@@ -196,6 +200,7 @@ function normalizeDraft(value: AutomationSetupDraft): AutomationSetupDraft {
     ...(existingCustomTarballPath ? { existingCustomTarballPath } : {}),
     ...(serverDraftId ? { serverDraftId } : {}),
     ...(materializedAutomationId ? { materializedAutomationId } : {}),
+    ...(existingCustomTarballPath ? { existingCustomTarballPath } : {}),
     ...(fieldMetadata ? { fieldMetadata } : {}),
     ...(appliedAgentEventIds && appliedAgentEventIds.length > 0
       ? { appliedAgentEventIds }
